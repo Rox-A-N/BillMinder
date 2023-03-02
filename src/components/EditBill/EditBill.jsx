@@ -16,12 +16,12 @@ function EditBill(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('in Edit Bill Submit', props);
+    console.log('in Edit Bill Submit');
     submitBill();
   }
 
   const submitBill = () => {
-    history.push('/user');
+    history.push('/bills');
   }
 
   return (
