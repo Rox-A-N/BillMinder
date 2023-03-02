@@ -1,3 +1,5 @@
+// This component allows the user to Add/Edit a bill to their tracker
+
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -12,7 +14,7 @@ function EditBill(props) {
   const store = useSelector((store) => store);
   const history = useHistory();
 
-  const [heading, setHeading] = useState('Edit Bill Component');
+  const [heading, setHeading] = useState('Add Bill Component');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,10 +27,43 @@ function EditBill(props) {
   }
 
   return (
-    <div>
-      <h2>{heading}</h2>
-      <button className="Submit" onClick={handleSubmit}>Submit</button>
-    </div>
+    <section>
+      <div>
+        <h2>{heading}</h2>
+        <form>
+          <label>Name:
+          <input placeholder='bill name' />
+          </label>
+
+          <label>Amount:
+          <input type='number' placeholder='amount' />
+          </label>
+
+          <label>Due Date:
+          <input type='date' />
+          </label>
+
+          <label>Category:
+          <input />
+          </label>
+
+          <label>Recurring:
+          <input placeholder='monthly/one-time' />
+          </label>
+
+          <label>Payment Method:
+          <input placeholder='account' />
+          </label>
+
+          <label>Note:
+          <input type='text' placeholder='comments' />
+          </label>
+        </form>
+
+        <button className="Submit" onClick={handleSubmit}>Save</button>
+        <button className="Cancel" onClick={submitBill}>Cancel</button>
+      </div>
+    </section>
   );
 }
 
