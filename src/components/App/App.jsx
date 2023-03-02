@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import EditBill from '../EditBill/EditBill';
+import BillPage from '../BillPage/BillPage';
 
 import './App.css';
 
@@ -67,6 +68,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows BillPage else shows LoginPage
+            exact
+            path="/bills"
+          >
+            <BillPage />
           </ProtectedRoute>
 
           <Route
