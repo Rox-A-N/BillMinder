@@ -16,10 +16,24 @@ function BillPage() {
     }, [dispatch]);
 
   return (
-    <div className="container">
-      <p>Bills</p>
-      { JSON.stringify(bills)}
-    </div>
+    <section>
+        <div className="container">
+        <h2>Bills</h2>
+        {/* { JSON.stringify(bills)} */}
+        </div>
+        <div>
+            <h3>Overdue Bills</h3>
+        </div>
+        <div>
+            <h3>Unpaid Bills</h3>
+        </div>
+        <div>
+            <h3>Paid Bills</h3>
+        </div>
+        <div>
+            <label>Breakdown</label>
+        </div>
+    </section>
   );
 }
 
