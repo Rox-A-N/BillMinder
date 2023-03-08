@@ -28,7 +28,7 @@ Button
 
 .btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
@@ -76,6 +76,12 @@ Button
   color: #008183;
 }
 
+.divider {
+  width: 5px;
+  /* height:auto; */
+  display: inline-block;
+}
+
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
@@ -109,4 +115,38 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+  display:block;
+
 }
+
+.buttonDiv {
+  display:flex;
+  justify-content: center;
+}
+
+h2 {
+  display:flex;
+  justify-content: center;
+}
+
+/* p {
+  display: block;
+  justify-content: center;
+} */
+
+h3 {
+  display: inline-block;
+  padding: 15px;
+}
+
+p {
+  display: inline-block;
+  padding: 15px;
+  margin-left: 10px;
+}
+
+
+
+
+
+
