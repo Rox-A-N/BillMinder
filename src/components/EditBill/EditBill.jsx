@@ -5,10 +5,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import '../App/App.css';
+
 function EditBill() {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const store = useSelector((store) => store);
+  const edit = useSelector((store) => store);
 
   const [heading, setHeading] = useState('Add Bill');
   const [name, setName] = useState('');
@@ -40,9 +42,10 @@ function EditBill() {
     <section>
       <div>
         <h2>{heading}</h2>
-        <form onSubmit={handleSubmit}>
+        <form className='formPanel' onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input
+            className="input"
             type="text"
             // id="bill-name"
             placeholder="e.g. Rent"
@@ -52,15 +55,20 @@ function EditBill() {
 
           <label htmlFor="amount">Amount:</label>
           <input
+            className="input"
             type="number"
+            min="0.01" 
+            step="0.01" 
+            max="10000"
             // id="bill-amount"
-            placeholder="e.g. 1000"
+            placeholder="e.g. 100.00"
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
           />
 
           <label htmlFor="bill-due-date">Due Date:</label>
           <input
+            className="input"
             type="date"
             // id="bill-due-date"
             value={due_date}
@@ -69,6 +77,7 @@ function EditBill() {
 
           <label htmlFor="bill-category">Category:</label>
           <input
+            className="input"
             type="text"
             // id="bill-category"
             placeholder="e.g. Utilities"
@@ -78,6 +87,7 @@ function EditBill() {
 
           <label htmlFor="bill-payment-method">Payment Method:</label>
           <input
+            className="input"
             type="text"
             // id="bill-payment-method"
             placeholder="e.g. Credit Card"
@@ -87,14 +97,16 @@ function EditBill() {
 
           <label htmlFor="bill-note">Note</label>
           <input
+            className="input"
             type="text"
             // id="bill-note"
             placeholder="e.g. info on bill"
             value={note}
             onChange={(event) => setNote(event.target.value)}
             />
-            <button className="Submit" type='Submit'>Save</button>
-            <button className="Cancel" onClick={cancelBill}>Cancel</button>
+            <button className="btn" type='Submit'>Save</button>
+            <div className="divider"></div>
+            <button className="btn" onClick={cancelBill}>Cancel</button>
         </form>
       </div>
     </section>
