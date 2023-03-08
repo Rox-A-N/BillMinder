@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import './BillPage.css';
+import '../App/App.css';
+// import '../BillPage.css';
 
 
 // This is one of our simplest components
@@ -30,18 +31,18 @@ function BillPage() {
     <section>
         <div className="container">
         <h2>Bills</h2>
-        <h3>Name</h3>
+        {/* <h3>Name</h3>
         <h3>Amount</h3>
-        <h3>Due Date</h3>
+        <h3>Due Date</h3> */}
         {/* { JSON.stringify(bill)} */}
         </div>
-        <div>
+        <div className='container'>
             <h3>Overdue Bills</h3>
             <hr />
         </div>
+        <div className="container">
             <h3>Unpaid Bills</h3>
             <hr />
-        <div className="bills">
             
             {/* This bit below will map over bills if there are bills, otherwise nothing happens */}
             {bills && bills.map(bill => {
