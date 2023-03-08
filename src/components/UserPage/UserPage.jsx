@@ -20,11 +20,15 @@ function UserPage() {
 
   return (
     <>
-      <button className="edit" onClick={handleEdit}>Add Bill</button>
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
-        <p>Your ID is: {user.id}</p>
-        <LogOutButton className="btn" />
+        {/* <p>Your ID is: {user.id}</p> */}
+        <br />
+        <div className="buttonDiv">
+          <button className="btn" onClick={handleEdit}>Add Bill</button>
+          <div className="divider"></div>
+          <LogOutButton className="btn" />
+        </div>
       </div>
     </>
   );
