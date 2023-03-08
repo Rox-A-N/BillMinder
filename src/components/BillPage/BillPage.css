@@ -7,6 +7,8 @@ p {
     display: inline-block;
     padding: 15px;
     margin-left: 10px;
-    /* font-weight: 525; */
 }
 
+.bills {
+    font-weight: 600;
+}
