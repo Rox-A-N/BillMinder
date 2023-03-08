@@ -1,70 +1,103 @@
 // This component allows the user to Add/Edit a bill to their tracker
+// So far it is adding a bill, the edit function will be added later
 
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
-function EditBill(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
+function EditBill() {
+  const dispatch = useDispatch();
   const history = useHistory();
+  // const store = useSelector((store) => store);
 
-  const [heading, setHeading] = useState('Add Bill Component');
+  const [heading, setHeading] = useState('Add Bill');
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [due_date, setDue_date] = useState('2023-03-07');
+  const [category, setCategory] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [note, setNote] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('in Edit Bill Submit');
-    submitBill();
-  }
-
-  const submitBill = () => {
+    const newBill = {
+      name,
+      amount,
+      due_date,
+      category,
+      paymentMethod,
+      note
+    }
+    dispatch({ type: 'POST_BILLS', payload: {newBill} });
     history.push('/bills');
+  };
+
+  const cancelBill = () => {
+        history.push('/bills');
   }
 
   return (
     <section>
       <div>
         <h2>{heading}</h2>
-        <form>
-          <label>Name:
-          <input placeholder='bill name' />
-          </label>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            // id="bill-name"
+            placeholder="e.g. Rent"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
 
-          <label>Amount:
-          <input type='number' placeholder='amount' />
-          </label>
+          <label htmlFor="amount">Amount:</label>
+          <input
+            type="number"
+            // id="bill-amount"
+            placeholder="e.g. 1000"
+            value={amount}
+            onChange={(event) => setAmount(event.target.value)}
+          />
 
-          <label>Due Date:
-          <input type='date' />
-          </label>
+          <label htmlFor="bill-due-date">Due Date:</label>
+          <input
+            type="date"
+            // id="bill-due-date"
+            value={due_date}
+            onChange={(event) => setDue_date(event.target.value)}
+          />
 
-          <label>Category:
-          <input />
-          </label>
+          <label htmlFor="bill-category">Category:</label>
+          <input
+            type="text"
+            // id="bill-category"
+            placeholder="e.g. Utilities"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+          />
 
-          <label>Recurring:
-          <input placeholder='monthly/one-time' />
-          </label>
+          <label htmlFor="bill-payment-method">Payment Method:</label>
+          <input
+            type="text"
+            // id="bill-payment-method"
+            placeholder="e.g. Credit Card"
+            value={paymentMethod}
+            onChange={(event) => setPaymentMethod(event.target.value)}
+          />
 
-          <label>Payment Method:
-          <input placeholder='account' />
-          </label>
-
-          <label>Note:
-          <input type='text' placeholder='comments' />
-          </label>
+          <label htmlFor="bill-note">Note</label>
+          <input
+            type="text"
+            // id="bill-note"
+            placeholder="e.g. info on bill"
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            />
+            <button className="Submit" type='Submit'>Save</button>
+            <button className="Cancel" onClick={cancelBill}>Cancel</button>
         </form>
-
-        <button className="Submit" onClick={handleSubmit}>Save</button>
-        <button className="Cancel" onClick={submitBill}>Cancel</button>
       </div>
     </section>
-  );
-}
+  )};
 
-export default EditBill;
+  export default EditBill;
