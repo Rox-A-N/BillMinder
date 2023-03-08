@@ -1,5 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import './BillPage.css';
+
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -7,28 +11,54 @@ import { useDispatch, useSelector } from 'react-redux';
 // or even care what the redux state is
 
 function BillPage() {
+    
     const dispatch = useDispatch();
-
-    const bills = useSelector(store => store.bill);
+    const history = useHistory();
+    const bills = useSelector(store => store.billReducer);
   
     useEffect(() => {
       dispatch({ type: 'FETCH_BILLS' });
     }, [dispatch]);
 
+    const handleBillClick = (bill) => {
+        // event.preventDefault();
+        console.log(`Clicked on bill with id: ${bill.id}`);
+        history.push('/edit');
+    }
+
   return (
     <section>
         <div className="container">
         <h2>Bills</h2>
-        {/* { JSON.stringify(bills)} */}
+        <h3>Name</h3>
+        <h3>Amount</h3>
+        <h3>Due Date</h3>
+        {/* { JSON.stringify(bill)} */}
         </div>
         <div>
             <h3>Overdue Bills</h3>
+            <hr />
         </div>
-        <div>
             <h3>Unpaid Bills</h3>
+            <hr />
+        <div className="bills">
+            
+            {/* This bit below will map over bills if there are bills, otherwise nothing happens */}
+            {bills && bills.map(bill => {
+                return (
+                <div className="bill-line" key={bill.id} onClick={() => handleBillClick(bill)}>
+                    <p>{bill.name}</p>
+                    <p>{bill.amount}</p>
+                    <p>{bill.due_date}</p>
+                    {/* <button className="submit" type='submit'>Edit</button> */}
+                </div>
+                )
+            })}
+
         </div>
         <div>
             <h3>Paid Bills</h3>
+            <hr />
         </div>
         <div>
             <label>Breakdown</label>
