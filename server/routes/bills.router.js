@@ -27,8 +27,8 @@ router.post('/', (req, res) => {
   // POST route code here
   console.log('inside POST route', req.body);
   let queryText = `
-  INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date")
-  VALUES ($1, $2, $3, $4)
+  INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date", "category")
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING "id";
   `;
   pool.query(queryText, [req.user.id, req.body.newBill.name, req.body.newBill.amount, req.body.newBill.due_date] ).then((result) => {
@@ -39,5 +39,23 @@ router.post('/', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+// /** 
+// POST route template- NEED TO CHANGE THE DEETS TO USE BELOW CODE
+//  */
+
+// router.put('/:id', (req, res) => {
+//   // Update this single bill
+//   const billToUpdate = req.params.id;
+//   const sqlText = `UPDATE bill_data SET github_name = $1 WHERE id = $2`;
+//   pool.query(sqlText, [req.body.github_name, billToUpdate])
+//       .then((result) => {
+//           res.sendStatus(200);
+//       })
+//       .catch((error) => {
+//           console.log(`Error making database query ${sqlText}`, error);
+//           res.sendStatus(500);
+//       });
+// });
 
 module.exports = router;
