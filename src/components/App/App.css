@@ -129,10 +129,18 @@ h2 {
   justify-content: center;
 }
 
-/* p {
-  display: block;
-  justify-content: center;
-} */
+.bill-line {
+   box-sizing: border-box;
+  width: 400px;
+  max-width: 100%;
+  padding: 25px;
+  margin: 0 auto 20px;
+  background-color: #efefef;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  /* display: block;
+  justify-content: center; */
+}
 
 h3 {
   display: inline-block;
@@ -143,6 +151,14 @@ p {
   display: inline-block;
   padding: 15px;
   margin-left: 10px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.datePicker {
+  
 }
 
 
