@@ -5,7 +5,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_BILL" actions
 function* fetchBills() {
-    // console.log('here in the fetchBill generator function'); // test console.log
+    console.log('here in the fetchBill generator function'); 
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ function* fetchBills() {
 }
 
 function* postBills(action) {
-  console.log('New Bill: ', action.payload);
+  // console.log('New Bill: ', action.payload);
   // wrap in try/catch
   // yield post request
   // yield 'put' to reducer
@@ -34,7 +34,7 @@ function* postBills(action) {
 
     yield axios.post('/api/bills', action.payload);
     // console.log('in the axios.post', action.payload);
-    yield fetchBills({type: 'FETCH_BILLS', payload: action.payload});
+    yield put({type: 'FETCH_BILLS'});
   } catch (error) {
     console.log('error posting', error);
   }
@@ -43,6 +43,8 @@ function* postBills(action) {
 // watcher saga listens for the 'FETCH_BILLS' action to be dispatched
 // from the BillPage.jsx, 
 //then runs'fetchBills' saga
+// watcher sage listens for the 'POST_BILLS' type to be dispatched from
+// the EditBill page, then runs postBills
 function* billSaga() {
   yield takeEvery('FETCH_BILLS', fetchBills);
   yield takeEvery('POST_BILLS', postBills);
