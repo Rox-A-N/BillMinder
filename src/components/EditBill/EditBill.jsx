@@ -4,18 +4,24 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 import '../App/App.css';
 
 function EditBill() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const edit = useSelector((store) => store);
 
+  // access to the redux store from the billReducer
+  const edit = useSelector((store) => store.billReducer);
+
+  const [startDate, setStartDate] = useState(new Date());
   const [heading, setHeading] = useState('Add Bill');
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
-  const [due_date, setDue_date] = useState('2023-03-07');
+  const [due_date, setDue_date] = useState('03-07-2023');
   const [category, setCategory] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [note, setNote] = useState('');
@@ -67,12 +73,17 @@ function EditBill() {
           />
 
           <label htmlFor="bill-due-date">Due Date:</label>
-          <input
-            className="input"
-            type="date"
-            // id="bill-due-date"
-            value={due_date}
-            onChange={(event) => setDue_date(event.target.value)}
+          {/* original date picker */}
+          {/* <input type="date" id="start" 
+            
+            min="01-01-2023" >
+          </input> */}
+
+          <DatePicker
+            dateFormat="MM/dd/yyyy"
+            showIcon
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
           />
 
           <label htmlFor="bill-category">Category:</label>
