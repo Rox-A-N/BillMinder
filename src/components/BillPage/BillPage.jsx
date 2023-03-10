@@ -19,7 +19,7 @@ function BillPage() {
   
     useEffect(() => {
       dispatch({ type: 'FETCH_BILLS' });
-    }, [dispatch]);
+    }, []);
 
     const handleBillClick = (bill) => {
         // event.preventDefault();
@@ -34,7 +34,7 @@ function BillPage() {
         {/* <h3>Name</h3>
         <h3>Amount</h3>
         <h3>Due Date</h3> */}
-        {/* { JSON.stringify(bill)} */}
+        {/* { JSON.stringify(bills)} */}
         </div>
         <div className='container'>
             <h3>Overdue Bills</h3>
@@ -45,10 +45,10 @@ function BillPage() {
             <hr />
             
             {/* This bit below will map over bills if there are bills, otherwise nothing happens */}
-            {bills && bills.map(bill => {
+            {bills.map(bill => {
                 return (
                 <div className="bill-line" key={bill.id} onClick={() => handleBillClick(bill)}>
-                    <p>{bill.name}</p>
+                    <p className='name'>{bill.name}</p>
                     <p>{bill.amount}</p>
                     <p>{bill.due_date}</p>
                     {/* <button className="submit" type='submit'>Edit</button> */}
