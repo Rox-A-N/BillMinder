@@ -19,29 +19,30 @@ router.get('/', (req, res) => {
   })
 });
 
-// /**
-//  * POST route template
-//  */
+
 
 router.post('/', (req, res) => {
   // POST route code here
   console.log('inside POST route', req.body);
   let queryText = `
-  INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date", "category")
-  VALUES ($1, $2, $3, $4, $5)
+  INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date", "category", "payment_method", "payment_status", "cleared_bank", "notes")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING "id";
   `;
-  pool.query(queryText, [req.user.id, req.body.newBill.name, req.body.newBill.amount, req.body.newBill.due_date] ).then((result) => {
+  pool.query(queryText, [req.user.id, req.body.newBill.name, req.body.newBill.amount, 
+    req.body.newBill.due_date, req.body.newBill.category, req.body.newBill.payment_method, 
+    req.body.newBill.payment_status, req.body.newBill.cleared_bank, req.body.newBill.notes] )
+    .then((result) => {
     console.log('Response in POST:', req.body);
-    res.sendStatus(200);
+    res.send(result.rows);
   }).catch(error => {
     console.log(error);
-    res.sendStatus(500);
+    res.sendStatus(503);
   })
 });
 
 // /** 
-// POST route template- NEED TO CHANGE THE DEETS TO USE BELOW CODE
+// PUT route template- NEED TO CHANGE THE DEETS TO USE BELOW CODE
 //  */
 
 // router.put('/:id', (req, res) => {
