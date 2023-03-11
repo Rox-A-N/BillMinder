@@ -1,24 +1,30 @@
 // This component allows the user to Add/Edit a bill to their tracker
 // So far it is adding a bill, the edit function will be added later
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import axios from 'axios';
 
 import '../App/App.css';
+
+
 
 function EditBill() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
 
   // access to the redux store from the billReducer
   const edit = useSelector((store) => store.billReducer);
 
   const [startDate, setStartDate] = useState(new Date());
   const [heading, setHeading] = useState('Add Bill');
+
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [due_date, setDue_date] = useState('03-07-2023');
@@ -37,17 +43,32 @@ function EditBill() {
       note
     }
     dispatch({ type: 'POST_BILLS', payload: {newBill} });
-    history.push('/bills');
+    history.push('/edit');
   };
 
   const cancelBill = () => {
         history.push('/bills');
   }
 
+  useEffect(() => {
+    if (id) {   // Return false if id is undefined
+      axios.get(`/api/bills/${id}`).then(response => {
+        const bill = response.data;
+        setName(bill.name);
+        setAmount(bill.amount);
+        setDue_date(bill.due_date);
+      }).catch(error => {
+        console.log(error);
+        // alert('Something went wrong!');
+      })
+    } // else do nothing
+  }, [id]);
+
   return (
     <section>
       <div>
-        <h2>{heading}</h2>
+        {/* <h2>{heading}</h2> */}
+        {id ? <h2>Edit Bill</h2> : <h2>Add Bill</h2>}
         <form className='formPanel' onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input
@@ -97,14 +118,15 @@ function EditBill() {
           />
 
           <label htmlFor="bill-payment-method">Payment Method:</label>
-          <input
+          <select></select>
+          {/* <input
             className="input"
             type="text"
             // id="bill-payment-method"
             placeholder="e.g. Credit Card"
             value={paymentMethod}
             onChange={(event) => setPaymentMethod(event.target.value)}
-          />
+          /> */}
 
           <label htmlFor="bill-note">Note</label>
           <input
