@@ -4,4 +4,36 @@
 <input type='date' className='date'  />
 
 
+## React Date Picker
+
+### Put the const in the page function
+  const [startDate, setStartDate] = useState(new Date());
+
+### Put the code from inside the return in place of existing Date Picker
+  
+  return (
+    <DatePicker
+      dateFormat="MM/dd/yyyy"
+      selected={startDate}
+      onChange= {(date) => setStartDate(date)}
+    />
+  );
+
+### With Calender Icon
+   
+  const [startDate, setStartDate] = useState(new Date());
+
+  return (
+    <DatePicker
+      showIcon 
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+    />
+  );
+
+  this didn't produce an icon^
+
+
+
+
 
