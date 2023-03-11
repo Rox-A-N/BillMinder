@@ -19,13 +19,28 @@ router.get('/', (req, res) => {
   })
 });
 
+router.get('/:id', (req, res) => {
+  const idToGet = req.params.id;
+  const queryText = `SELECT * FROM bill_data WHERE id=$1`;
+  pool.query(queryText, [idToGet])
+  .then( (result) => {
+    console.table(`Bill with id ${idToGet}`, result.rows);
+    res.send(result.rows);
+  })
+  .catch( (error) => {
+    console.log(`Error making database query ${query}`, error);
+    res.sendStatus(500);
+  })
+});
+
 
 
 router.post('/', (req, res) => {
   // POST route code here
   console.log('inside POST route', req.body);
   let queryText = `
-  INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date", "category", "payment_method", "payment_status", "cleared_bank", "notes")
+  INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date", "category", 
+  "payment_method", "payment_status", "cleared_bank", "notes")
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING "id";
   `;
@@ -42,21 +57,25 @@ router.post('/', (req, res) => {
 });
 
 // /** 
-// PUT route template- NEED TO CHANGE THE DEETS TO USE BELOW CODE
+// PUT route 
 //  */
 
-// router.put('/:id', (req, res) => {
-//   // Update this single bill
-//   const billToUpdate = req.params.id;
-//   const sqlText = `UPDATE bill_data SET github_name = $1 WHERE id = $2`;
-//   pool.query(sqlText, [req.body.github_name, billToUpdate])
-//       .then((result) => {
-//           res.sendStatus(200);
-//       })
-//       .catch((error) => {
-//           console.log(`Error making database query ${sqlText}`, error);
-//           res.sendStatus(500);
-//       });
-// });
+router.put('/:id', (req, res) => {
+  // Update this single bill
+  const billToUpdate = req.params.id;
+  const queryText = `UPDATE bill_data SET "name" = $1, "amount" = $2, "due_date" = $3,
+  "category" = $4, "payment_method" = $5, "payment_status" = $6, "cleared_bank" = $7, 
+  "notes" = $8 WHERE id = $9`;
+  pool.query(queryText, [req.body.name, req.body.amount, req.body.due_date, req.body.category,
+    req.body.payment_method, req,body.payment_status, req,body.cleared_bank,
+    req.body.notes, billToUpdate])
+      .then((result) => {
+          res.sendStatus(200);
+      })
+      .catch((error) => {
+          console.log(`Error making database query ${sqlText}`, error);
+          res.sendStatus(500);
+      });
+});
 
 module.exports = router;
