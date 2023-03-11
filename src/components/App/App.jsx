@@ -121,8 +121,12 @@ function App() {
           </Route>
           <Route
             exact
-            path="/edit"
+            path="/edit/:id"
           >
+            <EditBill />
+          </Route>
+
+          <Route exact path="/add">
             <EditBill />
           </Route>
 
