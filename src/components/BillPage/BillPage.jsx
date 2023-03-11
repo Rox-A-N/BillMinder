@@ -6,11 +6,6 @@ import '../App/App.css';
 // import '../BillPage.css';
 
 
-// This is one of our simplest components
-// It doesn't have local state
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is
-
 function BillPage() {
     
     const dispatch = useDispatch();
@@ -24,7 +19,7 @@ function BillPage() {
     const handleBillClick = (bill) => {
         // event.preventDefault();
         console.log(`Clicked on bill with id: ${bill.id}`);
-        history.push('/edit');
+        history.push(`/edit/${bill.id}`);
     }
 
   return (
