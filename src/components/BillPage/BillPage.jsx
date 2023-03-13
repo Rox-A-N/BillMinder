@@ -22,6 +22,14 @@ function BillPage() {
         history.push(`/edit/${bill.id}`);
     }
 
+    const handleDelete = (bill) => {
+        console.log(`Delete clicked at: ${bill.id}` );
+        dispatch({ 
+            type: 'DELETE_BILL',
+            payload: bill.id
+        })
+    }
+
   return (
     <section>
         <div className="container">
@@ -38,19 +46,33 @@ function BillPage() {
         <div className="container">
             <h3>Unpaid Bills</h3>
             <hr />
+            <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody id="billsTableBody">
             
             {/* This bit below will map over bills if there are bills, otherwise nothing happens */}
             {bills.map(bill => {
                 return (
-                <div className="bill-line" key={bill.id} onClick={() => handleBillClick(bill)}>
-                    <p className='name'>{bill.name}</p>
-                    <p>{bill.amount}</p>
-                    <p>{bill.due_date}</p>
-                    {/* <button className="submit" type='submit'>Edit</button> */}
-                </div>
+                <>
+                <tr className="bill-line" key={bill.id} >
+                    <td className='name' onClick={() => handleBillClick(bill)}>{bill.name}</td>
+                    <td>{bill.amount}</td>
+                    <td>{bill.due_date}</td>
+                    <td>
+                        <button className="delete" onClick={() => handleDelete(bill)}>Delete</button>
+                    </td>
+                </tr>
+                </>
                 )
             })}
-
+            </tbody>
+            </table>
         </div>
         <div>
             <h3>Paid Bills</h3>
