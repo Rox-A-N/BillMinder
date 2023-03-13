@@ -21,7 +21,7 @@ function* fetchBills() {
   }
 }
 
-function* postBills(action) {
+function* addBills(action) {
   // console.log('New Bill: ', action.payload);
   // wrap in try/catch
   // yield post request
@@ -35,6 +35,7 @@ function* postBills(action) {
     yield axios.post('/api/bills', action.payload);
     // console.log('in the axios.post', action.payload);
     yield put({type: 'FETCH_BILLS'});
+    action.history.push('/bills');
   } catch (error) {
     console.log('error posting', error);
   }
@@ -47,7 +48,8 @@ function* postBills(action) {
 // the EditBill page, then runs postBills
 function* billSaga() {
   yield takeEvery('FETCH_BILLS', fetchBills);
-  yield takeEvery('POST_BILLS', postBills);
+  yield takeEvery('POST_BILLS', addBills);
+  yield takeEvery('DELETE_BILL', deleteBill);
 }
 
 export default billSaga;
