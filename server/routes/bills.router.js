@@ -38,18 +38,25 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
   console.log('inside POST route', req.body);
-  let queryText = `
+  let insertBillQuery = `
   INSERT INTO "bill_data" ("user_id", "name", "amount", "due_date", "category", 
   "payment_method", "payment_status", "cleared_bank", "notes")
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING "id";
   `;
-  pool.query(queryText, [req.user.id, req.body.newBill.name, req.body.newBill.amount, 
-    req.body.newBill.due_date, req.body.newBill.category, req.body.newBill.payment_method, 
-    req.body.newBill.payment_status, req.body.newBill.cleared_bank, req.body.newBill.notes] )
+  pool.query(insertBillQuery, [
+    req.user.id, 
+    req.body.newBill.name, 
+    Number(req.body.newBill.amount), 
+    req.body.newBill.due_date, 
+    req.body.newBill.category, 
+    req.body.newBill.payment_method, 
+    req.body.newBill.payment_status, 
+    req.body.newBill.cleared_bank, 
+    req.body.newBill.notes] )
     .then((result) => {
-    console.log('Response in POST:', req.body);
-    res.send(result.rows);
+    console.log('Response in POST:', result);
+    res.sendStatus(200);
   }).catch(error => {
     console.log(error);
     res.sendStatus(503);
@@ -65,10 +72,18 @@ router.put('/:id', (req, res) => {
   const billToUpdate = req.params.id;
   const queryText = `UPDATE bill_data SET "name" = $1, "amount" = $2, "due_date" = $3,
   "category" = $4, "payment_method" = $5, "payment_status" = $6, "cleared_bank" = $7, 
-  "notes" = $8 WHERE id = $9`;
-  pool.query(queryText, [req.body.name, req.body.amount, req.body.due_date, req.body.category,
-    req.body.payment_method, req,body.payment_status, req,body.cleared_bank,
-    req.body.notes, billToUpdate])
+  "notes" = $8 WHERE id = $9 AND user_id = $10`;
+  pool.query(queryText, [
+    req.body.name, 
+    req.body.amount, 
+    req.body.due_date, 
+    req.body.category,
+    req.body.payment_method, 
+    req,body.payment_status, 
+    req,body.cleared_bank,
+    req.body.notes, 
+    req.params.id, 
+    req.body.user_id])
       .then((result) => {
           res.sendStatus(200);
       })
