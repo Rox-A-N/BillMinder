@@ -33,7 +33,7 @@ function BillPage() {
   return (
     <section>
         <div className="container">
-        <h2>Bills</h2>
+        <h2>Bills List</h2>
         {/* <h3>Name</h3>
         <h3>Amount</h3>
         <h3>Due Date</h3> */}
@@ -59,7 +59,6 @@ function BillPage() {
             {/* This bit below will map over bills if there are bills, otherwise nothing happens */}
             {bills.map(bill => {
                 return (
-                <>
                 <tr className="bill-line" key={bill.id} >
                     <td className='name' onClick={() => handleBillClick(bill)}>{bill.name}</td>
                     <td>{bill.amount}</td>
@@ -68,7 +67,6 @@ function BillPage() {
                         <button className="delete" onClick={() => handleDelete(bill)}>Delete</button>
                     </td>
                 </tr>
-                </>
                 )
             })}
             </tbody>
@@ -78,9 +76,9 @@ function BillPage() {
             <h3>Paid Bills</h3>
             <hr />
         </div>
-        <div>
+        {/* <div>
             <label>Breakdown</label>
-        </div>
+        </div> */}
     </section>
   );
 }
