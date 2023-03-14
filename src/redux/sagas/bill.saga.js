@@ -41,6 +41,34 @@ function* addBills(action) {
   }
 }
 
+// function* deleteBill() {
+
+// }
+
+// worker Saga: will be fired on "POST_BILL" actions
+function* editBill() {
+  try {
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    // If a user is logged in, this will return their information
+    // from the server session (req.user)
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    yield axios.put('/api/bills/:id', config);
+    console.log('editSaga response:', );
+    
+    action.history.push('/bills');
+
+    yield put({ type: 'UPDATE_BILL', payload: response.data });
+  } catch (error) {
+    console.log('User POST request failed', error);
+  }
+}
+
+
 // watcher saga listens for the 'FETCH_BILLS' action to be dispatched
 // from the BillPage.jsx, 
 //then runs'fetchBills' saga
@@ -49,7 +77,8 @@ function* addBills(action) {
 function* billSaga() {
   yield takeEvery('FETCH_BILLS', fetchBills);
   yield takeEvery('POST_BILLS', addBills);
-  yield takeEvery('DELETE_BILL', deleteBill);
+  // yield takeEvery('DELETE_BILL', deleteBill);
+  yield takeEvery('EDIT_BILL', editBill);
 }
 
 export default billSaga;
