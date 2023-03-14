@@ -23,10 +23,10 @@ function EditBill() {
   const edit = useSelector((store) => store.billReducer);
 
   const [startDate, setStartDate] = useState(new Date());
-  const [heading, setHeading] = useState('Add Bill');
+  // const [heading, setHeading] = useState('Add Bill');
 
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const [due_date, setDue_date] = useState('03-07-2023');
   const [category, setCategory] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -42,8 +42,15 @@ function EditBill() {
       paymentMethod,
       note
     }
-    dispatch({ type: 'POST_BILLS', payload: {newBill} });
-    history.push('/edit');
+    if ( id) {
+      // EDIT AN EXISTING BILL
+      dispatch({ type: 'EDIT_BILL', payload: {newBill}, history});
+    } else {
+      // ADD A BILL
+      // Pass history with our dispatch so that the saga can redirect
+      dispatch({ type: 'POST_BILLS', payload: {newBill}, history });
+    }
+  
   };
 
   const cancelBill = () => {
@@ -67,7 +74,6 @@ function EditBill() {
   return (
     <section>
       <div>
-        {/* <h2>{heading}</h2> */}
         {id ? <h2>Edit Bill</h2> : <h2>Add Bill</h2>}
         <form className='formPanel' onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
@@ -88,7 +94,7 @@ function EditBill() {
             step="0.01" 
             max="10000"
             // id="bill-amount"
-            placeholder="e.g. 100.00"
+            // placeholder="e.g. 100.00"
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
           />
@@ -118,15 +124,15 @@ function EditBill() {
           />
 
           <label htmlFor="bill-payment-method">Payment Method:</label>
-          <select></select>
-          {/* <input
+          {/* <select></select> */}
+          <input
             className="input"
             type="text"
             // id="bill-payment-method"
             placeholder="e.g. Credit Card"
             value={paymentMethod}
             onChange={(event) => setPaymentMethod(event.target.value)}
-          /> */}
+          />
 
           <label htmlFor="bill-note">Note</label>
           <input
