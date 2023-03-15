@@ -20,7 +20,7 @@ function EditBill() {
   const { id } = useParams();
 
   // access to the redux store from the billReducer
-  const edit = useSelector((store) => store.billReducer);
+  const edit = useSelector((store) => store.editReducer);
 
   const [startDate, setStartDate] = useState(new Date());
   // const [heading, setHeading] = useState('Add Bill');
@@ -31,10 +31,12 @@ function EditBill() {
   const [category, setCategory] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [note, setNote] = useState('');
+  const [checked, setChecked] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newBill = {
+      checked,
       name,
       amount,
       due_date,
@@ -44,14 +46,22 @@ function EditBill() {
     }
     if ( id) {
       // EDIT AN EXISTING BILL
-      dispatch({ type: 'EDIT_BILL', payload: {newBill}, history});
+      dispatch({ 
+        type: 'EDIT_BILL', 
+        payload: edit, history});
     } else {
       // ADD A BILL
       // Pass history with our dispatch so that the saga can redirect
-      dispatch({ type: 'POST_BILLS', payload: {newBill}, history });
+      dispatch({ 
+        type: 'POST_BILLS', 
+        payload: {newBill}, history });
     }
   
   };
+
+  function toggle(value){
+    return !value;
+  }
 
   const cancelBill = () => {
         history.push('/bills');
@@ -76,11 +86,16 @@ function EditBill() {
       <div>
         {id ? <h2>Edit Bill</h2> : <h2>Add Bill</h2>}
         <form className='formPanel' onSubmit={handleSubmit}>
+          <label htmlFor="paid">Paid</label>
+          <input
+          type="checkbox"
+          checked={checked}
+          onChange={() => setChecked(toggle)}
+          />
           <label htmlFor="name">Name:</label>
           <input
             className="input"
             type="text"
-            // id="bill-name"
             placeholder="e.g. Rent"
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -93,7 +108,6 @@ function EditBill() {
             min="0.01" 
             step="0.01" 
             max="10000"
-            // id="bill-amount"
             // placeholder="e.g. 100.00"
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
@@ -108,7 +122,6 @@ function EditBill() {
 
           <DatePicker
             dateFormat="MM/dd/yyyy"
-            showIcon
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
@@ -117,7 +130,6 @@ function EditBill() {
           <input
             className="input"
             type="text"
-            // id="bill-category"
             placeholder="e.g. Utilities"
             value={category}
             onChange={(event) => setCategory(event.target.value)}
@@ -128,7 +140,6 @@ function EditBill() {
           <input
             className="input"
             type="text"
-            // id="bill-payment-method"
             placeholder="e.g. Credit Card"
             value={paymentMethod}
             onChange={(event) => setPaymentMethod(event.target.value)}
@@ -138,7 +149,6 @@ function EditBill() {
           <input
             className="input"
             type="text"
-            // id="bill-note"
             placeholder="e.g. info on bill"
             value={note}
             onChange={(event) => setNote(event.target.value)}
