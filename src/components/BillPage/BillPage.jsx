@@ -49,9 +49,11 @@ function BillPage() {
             <table>
             <thead>
                 <tr>
+                    <th>Paid</th>
                     <th>Name</th>
                     <th>Amount</th>
                     <th>Due Date</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody id="billsTableBody">
@@ -60,6 +62,7 @@ function BillPage() {
             {bills.map(bill => {
                 return (
                 <tr className="bill-line" key={bill.id} >
+                    <td typeof='checkbox'></td>
                     <td className='name' onClick={() => handleBillClick(bill)}>{bill.name}</td>
                     <td>{bill.amount}</td>
                     <td>{bill.due_date}</td>
