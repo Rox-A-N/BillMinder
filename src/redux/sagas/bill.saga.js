@@ -5,17 +5,17 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_BILL" actions
 function* fetchBills() {
-    console.log('here in the fetchBill generator function'); 
+    // console.log('here in the fetchBill generator function'); 
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
 
-    const response = yield axios.get('/api/bills', config);
-    console.log('RESPONSE', response.data);
+    const bill = yield axios.get('/api/bills', config);
+    console.log('fetchBill: bill=', bill.data);
 
-    yield put({ type: 'GET_BILLS', payload: response.data });
+    yield put({ type: 'GET_BILLS', payload: bill.data });
   } catch (error) {
     console.log('User get request failed', error);
   }
@@ -41,9 +41,23 @@ function* addBills(action) {
   }
 }
 
-// function* deleteBill() {
+function* deleteBill(action) {
+  console.log('delete payload', action.payload);
+  const id = action.payload;
+  console.log('id payload', id);
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
 
-// }
+    yield axios.delete(`/api/bills/${id}`, config);
+
+    yield put({ type: 'FETCH_BILLS'});
+  } catch (error) {
+    console.log('Error delete route', error);
+  }
+}
 
 // worker Saga: will be fired on "POST_BILL" actions
 function* editBill() {
@@ -57,8 +71,8 @@ function* editBill() {
       withCredentials: true,
     };
 
-    yield axios.put('/api/bills/:id', config);
-    console.log('editSaga response:', );
+    yield axios.put(`/api/bills/${bill_data.id}`, config);
+    console.log('editSaga response:', bill.id);
     
     action.history.push('/bills');
 
@@ -77,7 +91,7 @@ function* editBill() {
 function* billSaga() {
   yield takeEvery('FETCH_BILLS', fetchBills);
   yield takeEvery('POST_BILLS', addBills);
-  // yield takeEvery('DELETE_BILL', deleteBill);
+  yield takeEvery('DELETE_BILL', deleteBill);
   yield takeEvery('EDIT_BILL', editBill);
 }
 
