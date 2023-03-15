@@ -11,10 +11,21 @@ function BillPage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const bills = useSelector(store => store.billReducer);
+    const user = useSelector((store) => store.user);
   
     useEffect(() => {
       dispatch({ type: 'FETCH_BILLS' });
     }, []);
+
+    const handleAdd = (event) => {
+        event.preventDefault();
+        console.log('the add button has been clicked by user', user);
+        routeToAddBill();
+      }
+    
+      const routeToAddBill = () => {
+        history.push('/add');
+      }
 
     const handleBillClick = (bill) => {
         // event.preventDefault();
@@ -34,17 +45,18 @@ function BillPage() {
     <section>
         <div className="container">
         <h2>Bills List</h2>
+        <button className="btn" onClick={handleAdd}>Add Bill</button>
         {/* <h3>Name</h3>
         <h3>Amount</h3>
         <h3>Due Date</h3> */}
         {/* { JSON.stringify(bills)} */}
         </div>
-        <div className='container'>
+        {/* <div className='container'>
             <h3>Overdue Bills</h3>
             <hr />
-        </div>
+        </div> */}
         <div className="container">
-            <h3>Unpaid Bills</h3>
+            {/* <h3>Unpaid Bills</h3> */}
             <hr />
             <table>
             <thead>
@@ -75,10 +87,10 @@ function BillPage() {
             </tbody>
             </table>
         </div>
-        <div>
+        {/* <div>
             <h3>Paid Bills</h3>
             <hr />
-        </div>
+        </div> */}
         {/* <div>
             <label>Breakdown</label>
         </div> */}
