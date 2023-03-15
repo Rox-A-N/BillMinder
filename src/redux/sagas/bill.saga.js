@@ -13,7 +13,7 @@ function* fetchBills() {
     };
 
     const bill = yield axios.get('/api/bills', config);
-    console.log('fetchBill: bill=', bill.data);
+    console.log('fetchBill: bill ', bill.data);
 
     yield put({ type: 'GET_BILLS', payload: bill.data });
   } catch (error) {
@@ -60,7 +60,8 @@ function* deleteBill(action) {
 }
 
 // worker Saga: will be fired on "POST_BILL" actions
-function* editBill() {
+function* editBill(action) {
+  console.log('action.payload:', action.payload);
   try {
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -71,14 +72,14 @@ function* editBill() {
       withCredentials: true,
     };
 
-    yield axios.put(`/api/bills/${bill_data.id}`, config);
-    console.log('editSaga response:', bill.id);
+    yield axios.put(`/api/bills/${action.payload.id}`, config);
+    console.log('editSaga response:', action.payload.id);
     
     action.history.push('/bills');
 
-    yield put({ type: 'UPDATE_BILL', payload: response.data });
+    // yield put({ type: 'UPDATE_BILL', payload: response.data });
   } catch (error) {
-    console.log('User POST request failed', error);
+    console.log('User Edit request failed', error);
   }
 }
 

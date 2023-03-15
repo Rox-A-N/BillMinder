@@ -8,15 +8,15 @@ function UserPage() {
   const history = useHistory();
   const user = useSelector((store) => store.user);
 
-  const handleAdd = (event) => {
-    event.preventDefault();
-    console.log('the add button has been clicked by user', user);
-    routeToAddBill();
-  }
+  // const handleAdd = (event) => {
+  //   event.preventDefault();
+  //   console.log('the add button has been clicked by user', user);
+  //   routeToAddBill();
+  // }
 
-  const routeToAddBill = () => {
-    history.push('/add');
-  }
+  // const routeToAddBill = () => {
+  //   history.push('/add');
+  // }
 
   return (
     <>
@@ -25,7 +25,7 @@ function UserPage() {
         {/* <p>Your ID is: {user.id}</p> */}
         <br />
         <div className="buttonDiv">
-          <button className="btn" onClick={handleAdd}>Add Bill</button>
+        
           <div className="divider"></div>
           <LogOutButton className="btn" />
         </div>
