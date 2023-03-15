@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 //   res.send('HEEEEEYYY!!!!');
   let queryText = `SELECT * FROM "bill_data" WHERE "user_id" =$1;`;
   pool.query(queryText, [req.user.id]).then((result) => {
-    console.log('RESPONSE from db is: ', result.rows);
+    console.table(result.rows);
     res.send(result.rows);
   }).catch((error) => {
     console.log('error with GET request', error);
@@ -68,19 +68,22 @@ router.post('/', (req, res) => {
 //  */
 
 router.put('/:id', (req, res) => {
+  // console.log('Put: ', req.body.newBill);
+  console.log('Params', req.params.id);
   // Update this single bill
-  const billToUpdate = req.params.id;
+  // const billToUpdate = req.params.id;
   const queryText = `UPDATE bill_data SET "name" = $1, "amount" = $2, "due_date" = $3,
   "category" = $4, "payment_method" = $5, "payment_status" = $6, "cleared_bank" = $7, 
   "notes" = $8 WHERE id = $9 AND user_id = $10`;
+  // console.log('Put queryText', queryText);
   pool.query(queryText, [
     req.body.name, 
     req.body.amount, 
     req.body.due_date, 
     req.body.category,
     req.body.payment_method, 
-    req,body.payment_status, 
-    req,body.cleared_bank,
+    req.body.payment_status, 
+    req.body.cleared_bank,
     req.body.notes, 
     req.params.id, 
     req.body.user_id])
@@ -88,7 +91,23 @@ router.put('/:id', (req, res) => {
           res.sendStatus(200);
       })
       .catch((error) => {
-          console.log(`Error making database query ${sqlText}`, error);
+          console.log(`Error making database query ${queryText}`, error);
+          res.sendStatus(500);
+      });
+});
+
+
+// DELETE ROUTE
+router.delete('/:id', (req, res) => {
+  let queryText = `DELETE FROM "bill_data" WHERE "id" = $1;`;
+  pool
+      .query(queryText, [req.params.id])
+      .then((result) => {
+          console.log('delete result', result);
+          res.sendStatus(200);
+      })
+      .catch((error) => {
+          console.log('Error completing DELETE exercise query:', error);
           res.sendStatus(500);
       });
 });
