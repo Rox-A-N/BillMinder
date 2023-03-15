@@ -42,13 +42,14 @@ function EditBill() {
       due_date,
       category,
       paymentMethod,
-      note
+      note,
+      id
     }
     if ( id) {
       // EDIT AN EXISTING BILL
       dispatch({ 
         type: 'EDIT_BILL', 
-        payload: edit, history});
+        payload: newBill, history});
     } else {
       // ADD A BILL
       // Pass history with our dispatch so that the saga can redirect
@@ -70,10 +71,11 @@ function EditBill() {
   useEffect(() => {
     if (id) {   // Return false if id is undefined
       axios.get(`/api/bills/${id}`).then(response => {
-        const bill = response.data;
+        console.log(response.data);
+        const bill = response.data[0];
         setName(bill.name);
-        setAmount(bill.amount);
-        setDue_date(bill.due_date);
+        // setAmount(bill.amount);
+        // setDue_date(bill.due_date);
       }).catch(error => {
         console.log(error);
         // alert('Something went wrong!');
