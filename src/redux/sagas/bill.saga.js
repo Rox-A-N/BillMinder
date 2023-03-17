@@ -59,25 +59,16 @@ function* deleteBill(action) {
   }
 }
 
-// worker Saga: will be fired on "POST_BILL" actions
+// worker Saga: will be fired on "EDIT_BILL" actions
 function* editBill(action) {
   console.log('action.payload:', action.payload);
   try {
-    // the config includes credentials which
-    // allow the server session to recognize the user
-    // If a user is logged in, this will return their information
-    // from the server session (req.user)
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
 
-    yield axios.put(`/api/bills/${action.payload.id}`, config);
+    yield axios.put(`/api/bills/${action.payload.id}`, action.payload);
     console.log('editSaga response:', action.payload.id);
     
     action.history.push('/bills');
-
-    // yield put({ type: 'UPDATE_BILL', payload: response.data });
+    yield put({ type: 'FETCH_BILLS' }); // originally this was 'UPDATE_BILL' to pass to edit.reducer
   } catch (error) {
     console.log('User Edit request failed', error);
   }

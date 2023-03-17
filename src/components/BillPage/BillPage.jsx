@@ -41,6 +41,20 @@ function BillPage() {
         })
     }
 
+    const totalPaid = () => {
+        let total = 0;
+        bills.map(bill => {
+            if (bill.payment_status === true) {
+                total += Number(bill.amount)
+            }
+        })
+        return total;
+    }
+
+    const totalCleared = () => {
+
+    }
+
   return (
     <section>
         <div className="container">
@@ -74,7 +88,14 @@ function BillPage() {
             {bills.map(bill => {
                 return (
                 <tr className="bill-line" key={bill.id} >
-                    <td typeof='checkbox'></td>
+                    <td>  
+                        <input
+                    type="checkbox"
+                    checked={bill.payment_status}
+                    //   onChange={() => {
+                    //     console.log('setChecked function called with argument:'); 
+                    //     setPaid(!paid)}}
+                    /></td>
                     <td className='name' onClick={() => handleBillClick(bill)}>{bill.name}</td>
                     <td>{bill.amount}</td>
                     <td>{bill.due_date}</td>
@@ -87,10 +108,11 @@ function BillPage() {
             </tbody>
             </table>
         </div>
-        {/* <div>
+        <div>
             <h3>Paid Bills</h3>
             <hr />
-        </div> */}
+            <p>{totalPaid()}</p>
+        </div>
         {/* <div>
             <label>Breakdown</label>
         </div> */}

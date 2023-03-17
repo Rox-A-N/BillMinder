@@ -46,14 +46,14 @@ router.post('/', (req, res) => {
   `;
   pool.query(insertBillQuery, [
     req.user.id, 
-    req.body.newBill.name, 
-    Number(req.body.newBill.amount), 
-    req.body.newBill.due_date, 
-    req.body.newBill.category, 
-    req.body.newBill.payment_method, 
-    req.body.newBill.payment_status, 
-    req.body.newBill.cleared_bank, 
-    req.body.newBill.notes] )
+    req.body.name, 
+    Number(req.body.amount), 
+    req.body.due_date, 
+    req.body.category, 
+    req.body.paymentMethod, 
+    req.body.paid, 
+    req.body.cleared, 
+    req.body.note] )
     .then((result) => {
     console.log('Response in POST:', result);
     res.sendStatus(200);
@@ -81,12 +81,12 @@ router.put('/:id', (req, res) => {
     req.body.amount, 
     req.body.due_date, 
     req.body.category,
-    req.body.payment_method, 
-    req.body.payment_status, 
-    req.body.cleared_bank,
-    req.body.notes, 
+    req.body.paymentMethod, 
+    req.body.paid, 
+    req.body.cleared,
+    req.body.note, 
     req.params.id, 
-    req.body.user_id])
+    req.user.id])
       .then((result) => {
           res.sendStatus(200);
       })

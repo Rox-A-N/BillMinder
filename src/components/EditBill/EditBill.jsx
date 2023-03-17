@@ -57,7 +57,7 @@ function EditBill() {
       // Pass history with our dispatch so that the saga can redirect
       dispatch({ 
         type: 'POST_BILLS', 
-        payload: {newBill}, history });
+        payload: newBill, history });
     }
   
   };
@@ -75,13 +75,13 @@ function EditBill() {
       axios.get(`/api/bills/${id}`).then(response => {
         console.log(response.data);
         const bill = response.data[0];
-        setPaid(bill.paid);
-        setCleared(bill.cleared);
+        setPaid(bill.payment_status);
+        setCleared(bill.cleared_);
         setName(bill.name);
         setAmount(bill.amount);
         setDue_date(bill.due_date);
         setCategory(bill.category);
-        setPaymentMethod(bill.paymentMethod);
+        setPaymentMethod(bill.payment_method);
         setNote(bill.note);
       }).catch(error => {
         console.log(error);
@@ -101,15 +101,15 @@ function EditBill() {
           type="checkbox"
           checked={paid}
           onChange={() => {
-            console.log('setChecked function called with argument:', toggle(paid)); 
-            setPaid(toggle)}}
+            console.log('setChecked function called with argument:'); 
+            setPaid(!paid)}}
           />
 
           <label htmlFor="cleared">Cleared</label>
           <input
           type="checkbox"
           checked={cleared}
-          onChange={() => setCleared(toggle)}
+          onChange={() => setCleared(!cleared)}
           />
 
           <label htmlFor="name">Name:</label>
