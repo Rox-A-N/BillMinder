@@ -14,7 +14,7 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
-Create a new database called `prime_app` and create a `user` table:
+Create a new database called `prime_app` and create a `user` and `bill_data` table:
 
 ```SQL
 CREATE TABLE "user" (
@@ -22,6 +22,19 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+
+CREATE TABLE "bill_data" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR (80) NOT NULL,
+	"amount" INTEGER,
+	"due date" DATE,
+	"category" VARCHAR (80),
+	"repeat" VARCHAR (100),
+	"payment method" VARCHAR (255),
+	"payment status" VARCHAR (255),
+	"cleared bank" BOOLEAN,
+	"notes" VARCHAR (255),
+	"user_id" INT REFERENCES "user");
 
 ```
 
