@@ -26,17 +26,19 @@ function EditBill() {
   // const [heading, setHeading] = useState('Add Bill');
 
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const [due_date, setDue_date] = useState('03-07-2023');
   const [category, setCategory] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [note, setNote] = useState('');
-  const [checked, setChecked] = useState(false);
+  const [paid, setPaid] = useState(false);
+  const [cleared, setCleared] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newBill = {
-      checked,
+      paid,
+      cleared,
       name,
       amount,
       due_date,
@@ -73,12 +75,17 @@ function EditBill() {
       axios.get(`/api/bills/${id}`).then(response => {
         console.log(response.data);
         const bill = response.data[0];
+        setPaid(bill.paid);
+        setCleared(bill.cleared);
         setName(bill.name);
-        // setAmount(bill.amount);
-        // setDue_date(bill.due_date);
+        setAmount(bill.amount);
+        setDue_date(bill.due_date);
+        setCategory(bill.category);
+        setPaymentMethod(bill.paymentMethod);
+        setNote(bill.note);
       }).catch(error => {
         console.log(error);
-        // alert('Something went wrong!');
+        alert('Something went wrong!');
       })
     } // else do nothing
   }, [id]);
@@ -88,12 +95,23 @@ function EditBill() {
       <div>
         {id ? <h2>Edit Bill</h2> : <h2>Add Bill</h2>}
         <form className='formPanel' onSubmit={handleSubmit}>
+
           <label htmlFor="paid">Paid</label>
           <input
           type="checkbox"
-          checked={checked}
-          onChange={() => setChecked(toggle)}
+          checked={paid}
+          onChange={() => {
+            console.log('setChecked function called with argument:', toggle(paid)); 
+            setPaid(toggle)}}
           />
+
+          <label htmlFor="cleared">Cleared</label>
+          <input
+          type="checkbox"
+          checked={cleared}
+          onChange={() => setCleared(toggle)}
+          />
+
           <label htmlFor="name">Name:</label>
           <input
             className="input"
