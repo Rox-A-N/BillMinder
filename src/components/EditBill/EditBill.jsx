@@ -1,5 +1,4 @@
 // This component allows the user to Add/Edit a bill to their tracker
-// So far it is adding a bill, the edit function will be added later
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,12 +18,8 @@ function EditBill() {
   const history = useHistory();
   const { id } = useParams();
 
-  // access to the redux store from the billReducer
-  const edit = useSelector((store) => store.editReducer);
-
   const [startDate, setStartDate] = useState(new Date());
   // const [heading, setHeading] = useState('Add Bill');
-
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [due_date, setDue_date] = useState('03-07-2023');
@@ -62,10 +57,6 @@ function EditBill() {
   
   };
 
-  function toggle(value){
-    return !value;
-  }
-
   const cancelBill = () => {
         history.push('/bills');
   }
@@ -76,13 +67,13 @@ function EditBill() {
         console.log(response.data);
         const bill = response.data[0];
         setPaid(bill.payment_status);
-        setCleared(bill.cleared_);
+        setCleared(bill.cleared_bank);
         setName(bill.name);
         setAmount(bill.amount);
         setDue_date(bill.due_date);
         setCategory(bill.category);
         setPaymentMethod(bill.payment_method);
-        setNote(bill.note);
+        setNote(bill.notes);
       }).catch(error => {
         console.log(error);
         alert('Something went wrong!');

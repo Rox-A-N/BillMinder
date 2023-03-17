@@ -52,18 +52,20 @@ function BillPage() {
     }
 
     const totalCleared = () => {
-
+        let total = 0;
+        bills.map(bill => {
+            if (bill.cleared_bank === true) {
+                total += Number(bill.amount)
+            }
+        })
+        return total;
     }
 
   return (
     <section>
         <div className="container">
-        <h2>Bills List</h2>
-        <button className="btn" onClick={handleAdd}>Add Bill</button>
-        {/* <h3>Name</h3>
-        <h3>Amount</h3>
-        <h3>Due Date</h3> */}
-        {/* { JSON.stringify(bills)} */}
+            <h2>Bills List</h2>
+            <button className="btn" onClick={handleAdd}>Add Bill</button>
         </div>
         {/* <div className='container'>
             <h3>Overdue Bills</h3>
@@ -109,13 +111,13 @@ function BillPage() {
             </table>
         </div>
         <div>
-            <h3>Paid Bills</h3>
-            <hr />
-            <p>{totalPaid()}</p>
+            <h3>Paid Bills: {totalPaid()}</h3>
+            <hr/>
         </div>
-        {/* <div>
-            <label>Breakdown</label>
-        </div> */}
+        <div>
+            <h3>Cleared Bills: {totalCleared()}</h3>
+            <hr/>
+        </div>
     </section>
   );
 }
