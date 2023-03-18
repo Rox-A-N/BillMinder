@@ -16,22 +16,5 @@ const billReducer = (state = [], action) => {
   export default billReducer;
 
 
-  // saw this solution: 
-// switch (action.type) {
-// case 'FETCH BILL':
-// -- HANDLE THE FETCH_BILLS action--
-//  return state; // return the updated state
-//
-//  case 'ADD_BILL':
-// --HANDLE THE ADD_BILL action--
-//  return [...state, action.payload]; --return the updated state with the new bill
-//
-//  case 'DELETE_BILL':
-//  --HANDLE THE DELETE_BILL action--
-//  return state.filter(bill => bill.id !== action.payload.id); --return the updated state without the deleted bill
-//
-//  default:
-//      return state;
-// }
 
   

@@ -7,7 +7,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-image: url('../../../public/images/BillMinderImage.png');
+  background-image: url('/../BillMinder/public/images/BillMinderImage.png');
   background-size: 109%;
 }
 
