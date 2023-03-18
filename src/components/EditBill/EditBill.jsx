@@ -84,9 +84,10 @@ function EditBill() {
 
   return (
     <section>
-      <div>
-        {id ? <h2 id="whiteLetter">Edit Bill</h2> : <h2 id="whiteLetter">Add Bill</h2>}
-        <form className='formPanel' onSubmit={handleSubmit}>
+      <div className="container">
+        {id ? <h2 className="whiteLetter">Edit Bill</h2> : <h2 className="whiteLetter">Add Bill</h2>}
+      </div>
+      <form className='formPanel' onSubmit={handleSubmit}>
 
           <label htmlFor="paid">Paid</label>
           <input
@@ -178,7 +179,7 @@ function EditBill() {
             <div className="divider"></div>
             <button className="btn" onClick={cancelBill}>Cancel</button>
         </form>
-      </div>
+   
     </section>
   )};
 

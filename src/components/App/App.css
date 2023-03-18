@@ -8,12 +8,14 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
   background-image: url('../../../public/images/BillMinderImage.png');
-  background-size: 108%;
+  background-size: 109%;
 }
 
 img {
+  max-width: 50%;
+  border-color: #545E75;
+  border: solid;
   display: inline-block;
-  max-width: 100%;
 }
 
 .whiteLetter {
@@ -167,6 +169,11 @@ p {
 
 .name {
   font-weight: bold;
+}
+
+.checkbox {
+  display:inline-block;
+  width: 20px;
 }
 
 

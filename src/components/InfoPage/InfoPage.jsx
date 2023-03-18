@@ -7,8 +7,17 @@ import React from 'react';
 
 function InfoPage() {
   return (
-    <div className="container">
-      <p className="whiteLetter">Info Page</p>
+    <div className="formPanel" >
+      <h2>Info Page</h2>
+      <p>
+        <b>Thanks to Everyone Who Contributed to this App: </b>
+         Thank you to the Instructors of Prime, especially Casie Siekman, Chris Black, and Peter DeMaio!
+      </p>
+      <p>
+        Thanks to my fellow Lydian cohort-mates: we've all come along way, and I am so glad to have you all in my corner
+      </p>
+      <p>Get to know me professionally by scanning my QR code and visiting my LinkedIn profile.</p>
+      <img src="/images/qr-to-LinkedIn.png" alt="LinkedIn QR code" />
     </div>
   );
 }
