@@ -61,11 +61,16 @@ function BillPage() {
         return total;
     }
 
+    const waitingToClear = () => {
+        return totalPaid() - totalCleared();
+      }
+    
+
   return (
     <section>
         <div className="container">
-            <h2>Bills List</h2>
-            <button className="btn" onClick={handleAdd}>Add Bill</button>
+            <h2 className="whiteLetter">Bills List</h2>
+            <button className="add-btn" onClick={handleAdd}>Add Bill</button>
         </div>
         {/* <div className='container'>
             <h3>Overdue Bills</h3>
@@ -111,11 +116,15 @@ function BillPage() {
             </table>
         </div>
         <div>
-            <h3>Paid Bills: {totalPaid()}</h3>
+            <h3 className="whiteLetter">Paid Bills:$ {totalPaid()}</h3>
             <hr/>
         </div>
         <div>
-            <h3>Cleared Bills: {totalCleared()}</h3>
+            <h3 className="whiteLetter">Cleared Bills: ${totalCleared()}</h3>
+            <hr/>
+        </div>
+        <div>
+            <h3 className="whiteLetter">Waiting to Clear: ${waitingToClear()}</h3>
             <hr/>
         </div>
     </section>
