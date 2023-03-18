@@ -71,7 +71,7 @@ function BillPage() {
             <h3>Overdue Bills</h3>
             <hr />
         </div> */}
-        <div className="container">
+        <div className="table">
             {/* <h3>Unpaid Bills</h3> */}
             <hr />
             <table>
