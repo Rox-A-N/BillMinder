@@ -116,7 +116,7 @@ function BillPage() {
             </table>
         </div>
         <div>
-            <h3 className="whiteLetter">Paid Bills:$ {totalPaid()}</h3>
+            <h3 className="whiteLetter">Paid Bills: ${totalPaid()}</h3>
             <hr/>
         </div>
         <div>

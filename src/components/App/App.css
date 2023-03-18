@@ -28,6 +28,7 @@ Container
   padding: 20px;
 }
 
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -73,7 +74,7 @@ Button
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: white;
 }
 
 .btn_asLink:hover {
