@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 
 import '../App/App.css';
+// import'../EditBill/EditBill.css'
 
 
 
@@ -89,6 +90,7 @@ function EditBill() {
 
           <label htmlFor="paid">Paid</label>
           <input
+          className="checkbox"
           type="checkbox"
           checked={paid}
           onChange={() => {
@@ -98,23 +100,26 @@ function EditBill() {
 
           <label htmlFor="cleared">Cleared</label>
           <input
+          className="checkbox"
           type="checkbox"
           checked={cleared}
           onChange={() => setCleared(!cleared)}
           />
+          <br/>
 
           <label htmlFor="name">Name:</label>
           <input
-            className="input"
+            className="billDetailInput"
             type="text"
             placeholder="e.g. Rent"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
+          <br/>
 
           <label htmlFor="amount">Amount:</label>
           <input
-            className="input"
+            className="billDetailInput"
             type="number"
             min="0.01" 
             step="0.01" 
@@ -123,6 +128,7 @@ function EditBill() {
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
           />
+          <br/>
 
           <label htmlFor="bill-due-date">Due Date:</label>
           {/* original date picker */}
@@ -132,38 +138,42 @@ function EditBill() {
           </input> */}
 
           <DatePicker
+            className="billDetailInput"
             dateFormat="MM/dd/yyyy"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
+          <br/>
 
           <label htmlFor="bill-category">Category:</label>
           <input
-            className="input"
+            className="billDetailInput"
             type="text"
             placeholder="e.g. Utilities"
             value={category}
             onChange={(event) => setCategory(event.target.value)}
           />
+          <br/>
 
           <label htmlFor="bill-payment-method">Payment Method:</label>
           {/* <select></select> */}
           <input
-            className="input"
+            className="billDetailInput"
             type="text"
             placeholder="e.g. Credit Card"
             value={paymentMethod}
             onChange={(event) => setPaymentMethod(event.target.value)}
           />
 
-          <label htmlFor="bill-note">Note</label>
+          <label htmlFor="bill-note">Note:</label>
           <input
-            className="input"
+            className="billDetailInput"
             type="text"
             placeholder="e.g. info on bill"
             value={note}
             onChange={(event) => setNote(event.target.value)}
             />
+          <br/>
             <button className="btn" type='Submit'>Save</button>
             <div className="divider"></div>
             <button className="btn" onClick={cancelBill}>Cancel</button>
