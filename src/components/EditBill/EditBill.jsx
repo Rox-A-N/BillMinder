@@ -85,7 +85,7 @@ function EditBill() {
   return (
     <section>
       <div>
-        {id ? <h2>Edit Bill</h2> : <h2>Add Bill</h2>}
+        {id ? <h2 id="whiteLetter">Edit Bill</h2> : <h2 id="whiteLetter">Add Bill</h2>}
         <form className='formPanel' onSubmit={handleSubmit}>
 
           <label htmlFor="paid">Paid</label>
