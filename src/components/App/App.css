@@ -127,9 +127,9 @@ Form Treatment
 .formPanel {
   box-sizing: border-box;
   width: 400px;
-  max-width: 100%;
+  max-width: 95%;
   padding: 15px;
-  margin: 0 auto 20px;
+  margin: 0 auto 10px;
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
@@ -172,7 +172,7 @@ h3 {
 
 p {
   display: inline-block;
-  padding: 15px;
+  padding: 10px;
   margin-left: 10px;
 }
 
@@ -194,12 +194,6 @@ Table Treatment
   color: white;
 } */
 
-StyledTableCell {
-    width: 100;
-    max-width: 100;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
 
 

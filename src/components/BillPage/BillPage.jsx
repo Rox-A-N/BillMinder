@@ -31,7 +31,7 @@ function BillPage() {
     const StyledTableCell = styled(TableCell)`
             width: 100;
             max-width: 100;
-            overflow: hidden;
+            overflow: visible;
             text-overflow: ellipsis;
         `;
   
