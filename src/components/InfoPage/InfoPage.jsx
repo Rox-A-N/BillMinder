@@ -16,8 +16,8 @@ function InfoPage() {
       <p>
         Thanks to my fellow Lydian cohort-mates: we've all come along way, and I am so glad to have you all in my corner
       </p>
-      <p>Get to know me professionally by scanning my QR code and visiting my LinkedIn profile.</p>
-      <img src="/images/qr-to-LinkedIn.png" alt="LinkedIn QR code" />
+      <p>Get to know me professionally by scanning my QR code and visiting my <b>LinkedIn profile</b>:</p>
+      <img src="/images/qr-to-LinkedIn.png" alt="LinkedIn QR code" className='center' />
     </div>
   );
 }

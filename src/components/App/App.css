@@ -9,6 +9,8 @@ body {
   margin: 0px;
   background-image: url('/../BillMinder/public/images/BillMinderImage.png');
   background-size: 109%;
+  /* background-repeat: no-repeat; */
+  
 }
 
 img {
@@ -16,6 +18,13 @@ img {
   border-color: #545E75;
   border: solid;
   display: inline-block;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .whiteLetter {
@@ -119,7 +128,7 @@ Form Treatment
   box-sizing: border-box;
   width: 400px;
   max-width: 100%;
-  padding: 25px;
+  padding: 15px;
   margin: 0 auto 20px;
   background-color: #efefef;
   border-radius: 3px;
@@ -181,8 +190,15 @@ p {
 Table Treatment
 -------------------------------------------------------------------------------- */
 
-th {
+/* th {
   color: white;
+} */
+
+StyledTableCell {
+    width: 100;
+    max-width: 100;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
