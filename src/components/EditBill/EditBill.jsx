@@ -23,7 +23,7 @@ function EditBill() {
   // const [heading, setHeading] = useState('Add Bill');
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
-  const [due_date, setDue_date] = useState('03-07-2023');
+  const [due_date, setDue_date] = useState('03-23-2023');
   const [category, setCategory] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [note, setNote] = useState('');

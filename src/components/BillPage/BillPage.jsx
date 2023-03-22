@@ -12,6 +12,7 @@ import { TableContainer,
          Checkbox,
          Button,
          styled,
+         Container
     } from '@mui/material/';
  import  IconButton from '@mui/material/IconButton';
  import DeleteIcon from '@mui/icons-material/Delete';
@@ -92,14 +93,15 @@ function BillPage() {
     <section>
         <div className="container">
             <h2 className="whiteLetter">Bills List</h2>
-            <button className="add-btn" onClick={handleAdd}>Add Bill</button>
+            <Button variant='contained' align='left' onClick={handleAdd}>Add Bill</Button>
         </div>
         {/* <div className='container'>
             <h3>Overdue Bills</h3>
             <hr />
         </div> */}
-        <div style={{ width: '100%' }}>
-        <TableContainer component={Paper} sx={{ maxHeight: '400px' }}>
+        {/* <div style={{ width: '100%' }}> */}
+        <Container maxWidth="sm">
+        <TableContainer component={Paper} sx={{ maxHeight: '350px' }}>
            <Table aria-label='Bills Table' stickyHeader>
             <TableHead >
                 <TableRow >
@@ -120,7 +122,7 @@ function BillPage() {
                         </StyledTableCell>
                         <StyledTableCell onClick={() => handleBillClick(bill)}>{bill.name}</StyledTableCell>
                         <StyledTableCell>{bill.amount}</StyledTableCell>
-                        <StyledTableCell>{bill.due_date}</StyledTableCell>
+                        <StyledTableCell>{new Date(bill.due_date).toLocaleDateString()}</StyledTableCell>
                         <StyledTableCell>
                             {/* <Button variant='contained' onClick={() => handleDelete(bill)}>Delete</Button> */}
                             <IconButton aria-label='delete' onClick={() => handleDelete(bill)}>
@@ -133,7 +135,8 @@ function BillPage() {
            </Table>
 
         </TableContainer>
-        </div>
+        </Container>
+        {/* </div> */}
          {/* <div className="table"> */}
             {/* <h3>Unpaid Bills</h3>
             <hr />

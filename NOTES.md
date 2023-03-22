@@ -33,6 +33,14 @@
 
   this didn't produce an icon^
 
+    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+
 
 
 
