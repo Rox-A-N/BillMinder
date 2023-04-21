@@ -53,7 +53,7 @@ function* deleteBill(action) {
 
     yield axios.delete(`/api/bills/${id}`, config);
 
-    yield put({ type: 'FETCH_BILLS'});
+    yield put({ type: 'FETCH_BILLS'});    // This will give user the updated list of bills
   } catch (error) {
     console.log('Error delete route', error);
   }
