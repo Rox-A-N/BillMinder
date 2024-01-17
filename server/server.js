@@ -30,7 +30,7 @@ app.use('/api/bills', billRouter);
 app.use(express.static('build'));
 
 // App Set //
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 /** Listen * */
 app.listen(PORT, () => {
